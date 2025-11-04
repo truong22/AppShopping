@@ -2,9 +2,12 @@ package com.dailycodework.dreamshops.service.Product;
 
 import com.dailycodework.dreamshops.Exception.ProductNotFoundException;
 import com.dailycodework.dreamshops.Responsitory.CategoryRepository;
+import com.dailycodework.dreamshops.Responsitory.ImageRepository;
 import com.dailycodework.dreamshops.Responsitory.ProductRepository;
+import com.dailycodework.dreamshops.dao.ImageDto;
 import com.dailycodework.dreamshops.dao.ProductDto;
 import com.dailycodework.dreamshops.entity.Category;
+import com.dailycodework.dreamshops.entity.Image;
 import com.dailycodework.dreamshops.entity.Product;
 import com.dailycodework.dreamshops.reponse.AddProductResponse;
 import com.dailycodework.dreamshops.reponse.UpdateProductResponse;
@@ -21,6 +24,7 @@ public class ProductService implements IProductService{
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
+    private final ImageRepository imageRepository;
 
     @Override
     public List<Product> getAllProduct() {
@@ -130,7 +134,13 @@ public class ProductService implements IProductService{
 
     @Override
     public ProductDto convertedToDto(Product product) {
-         ProductDto productDto =modelMapper.map(product,ProductDto.class);
-         return productDto;
+            ProductDto productDto = modelMapper.map(product, ProductDto.class);
+            List<Image> images = imageRepository.findByProductId(product.getId());
+            List<ImageDto> imageDtos = images.stream()
+                    .map(image -> modelMapper.map(image, ImageDto.class))
+                    .toList();
+            productDto.setImages(imageDtos);
+            return productDto;
+        
     }
 }
