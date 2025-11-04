@@ -1,4 +1,4 @@
-package com.dailycodework.dreamshops.service;
+package com.dailycodework.dreamshops.service.Category;
 
 import com.dailycodework.dreamshops.entity.Category;
 

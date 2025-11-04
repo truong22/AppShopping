@@ -1,14 +1,12 @@
 package com.dailycodework.dreamshops.controller;
 
 import com.dailycodework.dreamshops.Exception.AlreadyExistsException;
-import com.dailycodework.dreamshops.Exception.ProductNotFoundException;
 import com.dailycodework.dreamshops.Exception.ResourceeNotFoundException;
 import com.dailycodework.dreamshops.Response.ApiResponse;
 import com.dailycodework.dreamshops.entity.Category;
-import com.dailycodework.dreamshops.service.IcategoryService;
+import com.dailycodework.dreamshops.service.Category.IcategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
